@@ -1,49 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temperature Converter</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
-
     <h1>Temperature Converter</h1>
 
-    <form method="POST">
+    <input type="number" id="temp" placeholder="Enter Temperature">
 
-        <input type="number"
-               step="any"
-               name="temperature"
-               placeholder="Enter Temperature"
-               required>
+    <select id="unit">
+        <option value="CtoF">Celsius to Fahrenheit</option>
+        <option value="FtoC">Fahrenheit to Celsius</option>
+    </select>
 
-        <select name="conversion">
+    <button onclick="convertTemperature()">Convert</button>
 
-            <option value="CtoF">Celsius → Fahrenheit</option>
-
-            <option value="FtoC">Fahrenheit → Celsius</option>
-
-            <option value="CtoK">Celsius → Kelvin</option>
-
-            <option value="KtoC">Kelvin → Celsius</option>
-
-        </select>
-
-        <button type="submit">Convert</button>
-
-    </form>
-
-    {% if result %}
-
-    <h2>Converted Temperature</h2>
-
-    <p>{{ result }}</p>
-
-    {% endif %}
-
+    <h2 id="result">Result: --</h2>
 </div>
+
+<script>
+function convertTemperature() {
+    let temp = parseFloat(document.getElementById("temp").value);
+    let unit = document.getElementById("unit").value;
+    let result = "";
+
+    if (isNaN(temp)) {
+        document.getElementById("result").innerHTML = "Please enter a valid temperature.";
+        return;
+    }
+
+    if (unit === "CtoF") {
+        result = (temp * 9 / 5) + 32;
+        document.getElementById("result").innerHTML =
+            temp + " °C = " + result.toFixed(2) + " °F";
+    } else {
+        result = (temp - 32) * 5 / 9;
+        document.getElementById("result").innerHTML =
+            temp + " °F = " + result.toFixed(2) + " °C";
+    }
+}
+</script>
 
 </body>
 </html>
