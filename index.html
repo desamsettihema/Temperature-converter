@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Temperature Converter</h1>
+
+    <form method="POST">
+
+        <input type="number"
+               step="any"
+               name="temperature"
+               placeholder="Enter Temperature"
+               required>
+
+        <select name="conversion">
+
+            <option value="CtoF">Celsius → Fahrenheit</option>
+
+            <option value="FtoC">Fahrenheit → Celsius</option>
+
+            <option value="CtoK">Celsius → Kelvin</option>
+
+            <option value="KtoC">Kelvin → Celsius</option>
+
+        </select>
+
+        <button type="submit">Convert</button>
+
+    </form>
+
+    {% if result %}
+
+    <h2>Converted Temperature</h2>
+
+    <p>{{ result }}</p>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
